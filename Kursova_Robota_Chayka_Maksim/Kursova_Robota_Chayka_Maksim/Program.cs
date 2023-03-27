@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 
 public class Car
 {
@@ -36,10 +37,16 @@ public class Car
 public class Logic
 {
     private List<Car> cars;
+    private SQLiteConnection connection;
 
     public Logic()
     {
         cars = new List<Car>();
+        connection = new SQLiteConnection("Data Source=Cars.sqlite;Version=3;");
+        connection.Open();
+        string createTableQuery = "CREATE TABLE IF NOT EXISTS Cars (Brand TEXT, Model TEXT, PricePerHour INTEGER)";
+        SQLiteCommand createTableCommand = new SQLiteCommand(createTableQuery, connection);
+        createTableCommand.ExecuteNonQuery();
     }
 
     public void AddCar()
@@ -52,6 +59,9 @@ public class Logic
         int price_per_hour = Convert.ToInt32(Console.ReadLine());
         Car car = new Car(brand, model, price_per_hour);
         cars.Add(car);
+        string insertQuery = $"INSERT INTO Cars (Brand, Model, PricePerHour) VALUES ('{brand}', '{model}', {price_per_hour})";
+        SQLiteCommand insertCommand = new SQLiteCommand(insertQuery, connection);
+        insertCommand.ExecuteNonQuery();
     }
 
     public void TakeACarToCarSharing()
@@ -66,6 +76,9 @@ public class Logic
             {
                 Console.WriteLine($"Стоимость данной машины в час составит {car.PricePerHour}$");
                 cars.Remove(car);
+                string deleteQuery = $"DELETE FROM Cars WHERE Brand='{brand}' AND Model='{model}'";
+                SQLiteCommand deleteCommand = new SQLiteCommand(deleteQuery, connection);
+                deleteCommand.ExecuteNonQuery();
                 return;
             }
         }
@@ -74,8 +87,16 @@ public class Logic
 
     public void ListOfAvailableCars()
     {
-        foreach (Car car in cars)
+        string selectQuery = "SELECT Brand, Model, PricePerHour FROM Cars";
+        SQLiteCommand selectCommand = new SQLiteCommand(selectQuery, connection);
+        SQLiteDataReader reader = selectCommand.ExecuteReader();
+        while (reader.Read())
         {
+            string brand = reader.GetString(0);
+            string model = reader.GetString(1);
+            int price_per_hour = reader.GetInt32(2);
+            Car car = new Car(brand, model, price_per_hour);
+            cars.Add(car);
             Console.WriteLine($"{car.Brand}, {car.Model} : {car.PricePerHour}$/час");
         }
     }
@@ -83,66 +104,33 @@ public class Logic
 
 public class Program
 {
-    private const int add_car = 1;
-    private const int take_a_car_to_car_sharing = 2;
-    private const int list_of_available_cars = 3;
-    private const int quit = 4;
-
-    private static Logic log = new Logic();
-
-    private static int GetMenuChoice()
+    static void Main(string[] args)
     {
+        Logic logic = new Logic();
+        Console.WriteLine("1- Добавить автомобиль");
+        Console.WriteLine("2- Взять автомобиль в аренду");
+        Console.WriteLine("3- Список доступных автомобилей");
+        Console.WriteLine("4- Выход из программы");
         while (true)
         {
-            try
+            Console.Write("Выберете номер действия: ");
+            int key = Convert.ToInt32(Console.ReadLine());
+            switch (key)
             {
-                Console.Write("Какую бы операцию вы хотели бы совершить:\n"
-                                + "1. Добавить машину\n"
-                                + "2. Взять машину в каршеринг\n"
-                                + "3. Список доступных машин\n"
-                                + "4. Выход\n");
-                int choice = Convert.ToInt32(Console.ReadLine());
-                if (choice == add_car || choice == take_a_car_to_car_sharing || choice == list_of_available_cars || choice == quit)
-                {
-                    return choice;
-                }
-                else
-                {
-                    Console.WriteLine("Введите число от 1 до 4");
-                }
-            }
-            catch (FormatException)
-            {
-                Console.WriteLine("Введите число от 1 до 4");
-            }
-        }
-    }
-
-    public static void Main()
-    {
-        int choice = 0;
-        while (choice != quit)
-        {
-            choice = GetMenuChoice();
-
-            if (choice == add_car)
-            {
-                log.AddCar();
-                Console.WriteLine();
-            }
-            else if (choice == take_a_car_to_car_sharing)
-            {
-                log.TakeACarToCarSharing();
-                Console.WriteLine();
-            }
-            else if (choice == list_of_available_cars)
-            {
-                log.ListOfAvailableCars();
-                Console.WriteLine();
-            }
-            else if (choice == quit)
-            {
-                break;
+                case 1:
+                    logic.AddCar();
+                    break;
+                case 2:
+                    logic.TakeACarToCarSharing();
+                    break;
+                case 3:
+                    logic.ListOfAvailableCars();
+                    break;
+                case 4:
+                    return;
+                default:
+                    Console.WriteLine("Введите номер от 1 до 4!");
+                    break;
             }
         }
     }

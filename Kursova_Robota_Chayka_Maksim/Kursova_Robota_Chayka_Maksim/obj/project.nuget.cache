@@ -1,8 +1,19 @@
 {
   "version": 2,
-  "dgSpecHash": "/yk8Gyw/7xCtU++sduEmCLnx+FQSvvTRXLFVeJ8E9YjUYmQjsoV2uahqz8bAI0A+Ivl+xkuDCh5U+aob7V74VQ==",
+  "dgSpecHash": "CcPXEUILy9tE9qSbxTVi5ZRLDNWKHvLuRmp8Osh9oKSpLWWt8lqu/XiAj95++9bOPnZ64TRkbFyGEvIwXEuz4g==",
   "success": true,
   "projectFilePath": "C:\\Users\\Max\\Documents\\GitHub\\Kursova_Robota_Chayka_Maksim\\Kursova_Robota_Chayka_Maksim\\Kursova_Robota_Chayka_Maksim\\Kursova_Robota_Chayka_Maksim.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Max\\.nuget\\packages\\microsoft.data.sqlite\\7.0.4\\microsoft.data.sqlite.7.0.4.nupkg.sha512",
+    "C:\\Users\\Max\\.nuget\\packages\\microsoft.data.sqlite.core\\7.0.4\\microsoft.data.sqlite.core.7.0.4.nupkg.sha512",
+    "C:\\Users\\Max\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
+    "C:\\Users\\Max\\.nuget\\packages\\sqlitepclraw.bundle_e_sqlite3\\2.1.4\\sqlitepclraw.bundle_e_sqlite3.2.1.4.nupkg.sha512",
+    "C:\\Users\\Max\\.nuget\\packages\\sqlitepclraw.core\\2.1.4\\sqlitepclraw.core.2.1.4.nupkg.sha512",
+    "C:\\Users\\Max\\.nuget\\packages\\sqlitepclraw.lib.e_sqlite3\\2.1.4\\sqlitepclraw.lib.e_sqlite3.2.1.4.nupkg.sha512",
+    "C:\\Users\\Max\\.nuget\\packages\\sqlitepclraw.provider.e_sqlite3\\2.1.4\\sqlitepclraw.provider.e_sqlite3.2.1.4.nupkg.sha512",
+    "C:\\Users\\Max\\.nuget\\packages\\stub.system.data.sqlite.core.netstandard\\1.0.117\\stub.system.data.sqlite.core.netstandard.1.0.117.nupkg.sha512",
+    "C:\\Users\\Max\\.nuget\\packages\\system.data.sqlite.core\\1.0.117\\system.data.sqlite.core.1.0.117.nupkg.sha512",
+    "C:\\Users\\Max\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512"
+  ],
   "logs": []
 }
