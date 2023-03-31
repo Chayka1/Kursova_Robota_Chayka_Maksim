@@ -107,10 +107,10 @@ public class Program
     static void Main(string[] args)
     {
         Logic logic = new Logic();
-        Console.WriteLine("1- Добавить автомобиль");
-        Console.WriteLine("2- Взять автомобиль в аренду");
-        Console.WriteLine("3- Список доступных автомобилей");
-        Console.WriteLine("4- Выход из программы");
+        Console.WriteLine("1. Добавить автомобиль");
+        Console.WriteLine("2. Взять автомобиль в аренду");
+        Console.WriteLine("3. Список доступных автомобилей");
+        Console.WriteLine("4. Выход из программы");
         while (true)
         {
             Console.Write("Выберете номер действия: ");
